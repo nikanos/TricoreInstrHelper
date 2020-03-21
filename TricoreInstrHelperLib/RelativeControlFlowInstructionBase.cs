@@ -9,12 +9,14 @@ namespace TricoreInstrHelperLib
 {
     public abstract class RelativeControlFlowInstructionBase : IInstruction
     {
-        const int MAX_OFFSET = (16 * 1024 * 1024) - 1;
-        const int MIN_OFFSET = -(16 * 1024 * 1024);
+        private readonly int MIN_OFFSET;
+        private readonly int MAX_OFFSET;
         private int _offset;
 
-        public RelativeControlFlowInstructionBase(int offset)
+        public RelativeControlFlowInstructionBase(int offset, int minOffset, int maxOffset)
         {
+            this.MIN_OFFSET = minOffset;
+            this.MAX_OFFSET = maxOffset;
             this.Offset = offset;
         }
 
@@ -52,19 +54,6 @@ namespace TricoreInstrHelperLib
             get;
         }
 
-        public byte[] GetInstructionBytes()
-        {
-            byte[] ret = new byte[4];
-            ret[0] = OpCode;
-            int absDisplacement = Displacement;
-            var converter = new BigEndianBitConverter();
-            byte[] absDisplacementBytes = converter.GetBytes(absDisplacement);
-
-            ret[1] = absDisplacementBytes[1];
-            ret[2] = absDisplacementBytes[3];
-            ret[3] = absDisplacementBytes[2];
-
-            return ret;
-        }
+        public abstract byte[] GetInstructionBytes();
     }
 }

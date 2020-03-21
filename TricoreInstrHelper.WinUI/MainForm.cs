@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using TricoreInstrHelperLib;
+using System.Linq;
 
 namespace TricoreInstrHelper.WinUI
 {
@@ -13,6 +14,8 @@ namespace TricoreInstrHelper.WinUI
             InitializeComponent();
         }
 
+        #region Properties
+        
         public UInt32 AddressStart
         {
             get
@@ -33,6 +36,17 @@ namespace TricoreInstrHelper.WinUI
             }
         }
 
+        public ControlFlowInstructionType InstructionType
+        {
+            get
+            {
+                string selectedInstructionType = (string)comboInstructionType.SelectedItem;
+                if (!IsValidInstructionType(selectedInstructionType))
+                    throw new InvalidInputException("Instruction Type is invalid");
+                return (ControlFlowInstructionType)Enum.Parse(typeof(ControlFlowInstructionType), selectedInstructionType);
+            }
+        }
+
         public string Result
         {
             get
@@ -45,11 +59,22 @@ namespace TricoreInstrHelper.WinUI
             }
         }
 
+        #endregion
+
+        #region Handlers
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            string[] instructionTypes = Enum.GetNames(typeof(ControlFlowInstructionType));
+            this.comboInstructionType.Items.AddRange(instructionTypes);
+            this.comboInstructionType.SelectedItem = ControlFlowInstructionType.Call32.ToString();
+        }
+
         private void ButtonGenerate_Click(object sender, EventArgs e)
         {
             try
             {
-                string instr = InstructionHelper.GetInstructionString(ControlFlowInstructionType.Call, AddressStart, AddressEnd);
+                string instr = InstructionHelper.GetInstructionString(InstructionType, AddressStart, AddressEnd);
                 Result = instr;
             }
             catch (InvalidInputException ex)
@@ -64,11 +89,6 @@ namespace TricoreInstrHelper.WinUI
             }
         }
 
-        private bool IsValidAddress(string addressString)
-        {
-            return Regex.IsMatch(addressString, "^[0-9A-F]{1,8}$", RegexOptions.IgnoreCase);
-        }
-
         private void ContextMenuStripResult_Opening(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(Result))
@@ -79,5 +99,43 @@ namespace TricoreInstrHelper.WinUI
         {
             Clipboard.SetText(Result);
         }
+
+        private void ComboInstructionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClearResult();
+        }
+
+        private void TextBoxAddressStart_TextChanged(object sender, EventArgs e)
+        {
+            ClearResult();
+        }
+
+        private void TextBoxAddressEnd_TextChanged(object sender, EventArgs e)
+        {
+            ClearResult();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        private bool IsValidAddress(string addressString)
+        {
+            return Regex.IsMatch(addressString, "^[0-9A-F]{1,8}$", RegexOptions.IgnoreCase);
+        }
+
+        private bool IsValidInstructionType(string instructionType)
+        {
+            if (string.IsNullOrEmpty(instructionType))
+                return false;
+            return Enum.GetNames(typeof(ControlFlowInstructionType)).Contains(instructionType);
+        }
+
+        private void ClearResult()
+        {
+            this.Result = string.Empty;
+        }
+
+        #endregion
     }
 }

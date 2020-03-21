@@ -4,13 +4,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TricoreInstrHelperLib.Tests
 {
     [TestClass]
-    public class CallInstructionTests
+    public class CallInstruction32Tests
     {
         [TestMethod]
         [ExpectedException(typeof(InvalidOffsetException))]
-        public void CallInstruction_WithZeroOffset_Throws()
+        public void CallInstruction32_WithZeroOffset_Throws()
         {
-            var callInstruction = new CallInstruction(0);
+            var callInstruction = new CallInstruction32(0);
         }
 
         [TestMethod]
@@ -20,15 +20,15 @@ namespace TricoreInstrHelperLib.Tests
         [DataRow(15)]
         [DataRow(161)]
         [ExpectedException(typeof(InvalidOffsetException))]
-        public void CallInstruction_WithOddOffset_Throws(int offset)
+        public void CallInstruction32_WithOddOffset_Throws(int offset)
         {
-            var callInstruction = new CallInstruction(offset);
+            var callInstruction = new CallInstruction32(offset);
         }
 
         [TestMethod]
-        public void CallInstruction_WithValidPositiveOffset_Succeeds()
+        public void CallInstruction32_WithValidPositiveOffset_Succeeds()
         {
-            var callInstruction = new CallInstruction(2);
+            var callInstruction = new CallInstruction32(2);
             byte[] ret = callInstruction.GetInstructionBytes();
 
             Assert.IsNotNull(ret);
@@ -41,9 +41,9 @@ namespace TricoreInstrHelperLib.Tests
         }
 
         [TestMethod]
-        public void CallInstruction_WithValidNegativeOffset_test1_Succeeds()
+        public void CallInstruction32_WithValidNegativeOffset_test1_Succeeds()
         {
-            var callInstruction = new CallInstruction(-2);
+            var callInstruction = new CallInstruction32(-2);
             byte[] ret = callInstruction.GetInstructionBytes();
 
             Assert.IsNotNull(ret);
@@ -56,9 +56,9 @@ namespace TricoreInstrHelperLib.Tests
         }
 
         [TestMethod]
-        public void CallInstruction_WithValidNegativeOffset_test2_Succeeds()
+        public void CallInstruction32_WithValidNegativeOffset_test2_Succeeds()
         {
-            var callInstruction = new CallInstruction(-130526);
+            var callInstruction = new CallInstruction32(-130526);
             byte[] ret = callInstruction.GetInstructionBytes();
 
             Assert.IsNotNull(ret);

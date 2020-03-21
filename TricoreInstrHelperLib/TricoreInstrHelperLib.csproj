@@ -44,14 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallInstruction16.cs" />
     <Compile Include="IInstruction.cs" />
     <Compile Include="InstructionHelper.cs" />
-    <Compile Include="JumpInstruction.cs" />
-    <Compile Include="CallInstruction.cs" />
+    <Compile Include="JumpInstruction16.cs" />
+    <Compile Include="JumpInstruction32.cs" />
+    <Compile Include="CallInstruction32.cs" />
     <Compile Include="ControlFlowInstructionType.cs" />
     <Compile Include="InvalidOffsetException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelativeControlFlowInstructionBase.cs" />
+    <Compile Include="RelativeControlFlowInstruction16Base.cs" />
+    <Compile Include="RelativeControlFlowInstruction32Base.cs" />
     <Compile Include="RelativeControlFlowInstructionFactory.cs" />
   </ItemGroup>
   <ItemGroup>

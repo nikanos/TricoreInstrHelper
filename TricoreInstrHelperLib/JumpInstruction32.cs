@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TricoreInstrHelperLib
 {
-    public class JumpInstruction : RelativeControlFlowInstructionBase
+    public class JumpInstruction32 : RelativeControlFlowInstruction32Base
     {
-        public JumpInstruction(int offset) : base(offset)
+        public JumpInstruction32(int offset) : base(offset)
         {
 
         }

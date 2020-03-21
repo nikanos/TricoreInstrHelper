@@ -29,27 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.comboBoxVersion = new System.Windows.Forms.ComboBox();
+            this.comboInstructionType = new System.Windows.Forms.ComboBox();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelEdition = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.labelResult = new System.Windows.Forms.Label();
-            this.textBoxAddressStart = new System.Windows.Forms.TextBox();
-            this.textBoxAddressEnd = new System.Windows.Forms.TextBox();
             this.contextMenuStripResult = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxAddressStart = new System.Windows.Forms.TextBox();
+            this.textBoxAddressEnd = new System.Windows.Forms.TextBox();
             this.contextMenuStripResult.SuspendLayout();
             this.SuspendLayout();
             // 
-            // comboBoxVersion
+            // comboInstructionType
             // 
-            this.comboBoxVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxVersion.FormattingEnabled = true;
-            this.comboBoxVersion.Location = new System.Drawing.Point(196, 129);
-            this.comboBoxVersion.Name = "comboBoxVersion";
-            this.comboBoxVersion.Size = new System.Drawing.Size(172, 33);
-            this.comboBoxVersion.TabIndex = 15;
+            this.comboInstructionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboInstructionType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboInstructionType.FormattingEnabled = true;
+            this.comboInstructionType.Location = new System.Drawing.Point(196, 129);
+            this.comboInstructionType.Name = "comboInstructionType";
+            this.comboInstructionType.Size = new System.Drawing.Size(172, 33);
+            this.comboInstructionType.TabIndex = 15;
+            this.comboInstructionType.SelectedIndexChanged += new System.EventHandler(this.ComboInstructionType_SelectedIndexChanged);
             // 
             // labelVersion
             // 
@@ -111,22 +113,6 @@
             this.labelResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelResult.UseMnemonic = false;
             // 
-            // textBoxAddressStart
-            // 
-            this.textBoxAddressStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.textBoxAddressStart.Location = new System.Drawing.Point(196, 12);
-            this.textBoxAddressStart.Name = "textBoxAddressStart";
-            this.textBoxAddressStart.Size = new System.Drawing.Size(172, 31);
-            this.textBoxAddressStart.TabIndex = 18;
-            // 
-            // textBoxAddressEnd
-            // 
-            this.textBoxAddressEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.textBoxAddressEnd.Location = new System.Drawing.Point(196, 74);
-            this.textBoxAddressEnd.Name = "textBoxAddressEnd";
-            this.textBoxAddressEnd.Size = new System.Drawing.Size(172, 31);
-            this.textBoxAddressEnd.TabIndex = 19;
-            // 
             // contextMenuStripResult
             // 
             this.contextMenuStripResult.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -143,6 +129,24 @@
             this.toolStripMenuItemCopy.Text = "Copy";
             this.toolStripMenuItemCopy.Click += new System.EventHandler(this.ToolStripMenuItemCopy_Click);
             // 
+            // textBoxAddressStart
+            // 
+            this.textBoxAddressStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.textBoxAddressStart.Location = new System.Drawing.Point(196, 12);
+            this.textBoxAddressStart.Name = "textBoxAddressStart";
+            this.textBoxAddressStart.Size = new System.Drawing.Size(172, 31);
+            this.textBoxAddressStart.TabIndex = 18;
+            this.textBoxAddressStart.TextChanged += new System.EventHandler(this.TextBoxAddressStart_TextChanged);
+            // 
+            // textBoxAddressEnd
+            // 
+            this.textBoxAddressEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.textBoxAddressEnd.Location = new System.Drawing.Point(196, 74);
+            this.textBoxAddressEnd.Name = "textBoxAddressEnd";
+            this.textBoxAddressEnd.Size = new System.Drawing.Size(172, 31);
+            this.textBoxAddressEnd.TabIndex = 19;
+            this.textBoxAddressEnd.TextChanged += new System.EventHandler(this.TextBoxAddressEnd_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,12 +156,13 @@
             this.Controls.Add(this.textBoxAddressStart);
             this.Controls.Add(this.buttonGenerate);
             this.Controls.Add(this.labelResult);
-            this.Controls.Add(this.comboBoxVersion);
+            this.Controls.Add(this.comboInstructionType);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelEdition);
             this.Controls.Add(this.label2);
             this.Name = "MainForm";
             this.Text = "Tricore Instruction Helper";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.contextMenuStripResult.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,7 +171,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxVersion;
+        private System.Windows.Forms.ComboBox comboInstructionType;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelEdition;
         private System.Windows.Forms.Label label2;

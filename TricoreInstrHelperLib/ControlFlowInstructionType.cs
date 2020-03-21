@@ -2,7 +2,9 @@
 {
     public enum ControlFlowInstructionType
     {
-        Jump,
-        Call
+        Jump16,
+        Call16,
+        Jump32,
+        Call32
     }
 }
