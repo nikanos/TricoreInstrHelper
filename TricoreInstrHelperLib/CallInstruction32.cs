@@ -2,7 +2,8 @@
 {
     public class CallInstruction32 : RelativeControlFlowInstruction32Base
     {
-        public CallInstruction32(int offset) : base(offset)
+        public CallInstruction32(int offset) :
+            base(offset)
         {
 
         }

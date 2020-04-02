@@ -8,7 +8,8 @@ namespace TricoreInstrHelperLib
 {
     public class JumpInstruction32 : RelativeControlFlowInstruction32Base
     {
-        public JumpInstruction32(int offset) : base(offset)
+        public JumpInstruction32(int offset) :
+            base(offset)
         {
 
         }
