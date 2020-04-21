@@ -1,6 +1,6 @@
-﻿namespace TricoreInstrHelperLib
+﻿namespace TricoreInstrHelperLib.Instructions
 {
-    public class CallInstruction32 : RelativeControlFlowInstruction32Base
+    class CallInstruction32 : RelativeControlFlowInstruction32Base
     {
         public CallInstruction32(int offset) :
             base(offset)

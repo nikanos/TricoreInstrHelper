@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TricoreInstrHelperLib
+﻿namespace TricoreInstrHelperLib.Instructions
 {
-    public class JumpInstruction32 : RelativeControlFlowInstruction32Base
+    class JumpInstruction32 : RelativeControlFlowInstruction32Base
     {
         public JumpInstruction32(int offset) :
             base(offset)

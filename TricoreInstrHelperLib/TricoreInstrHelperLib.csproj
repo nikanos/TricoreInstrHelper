@@ -44,18 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CallInstruction16.cs" />
-    <Compile Include="IInstruction.cs" />
+    <Compile Include="AddressRegister.cs" />
+    <Compile Include="AddressExtensions.cs" />
+    <Compile Include="Instructions\CallInstruction16.cs" />
+    <Compile Include="Instructions\IInstruction.cs" />
     <Compile Include="InstructionHelper.cs" />
-    <Compile Include="JumpInstruction16.cs" />
-    <Compile Include="JumpInstruction32.cs" />
-    <Compile Include="CallInstruction32.cs" />
-    <Compile Include="ControlFlowInstructionType.cs" />
+    <Compile Include="Instructions\JumpInstruction16.cs" />
+    <Compile Include="Instructions\JumpInstruction32.cs" />
+    <Compile Include="Instructions\CallInstruction32.cs" />
+    <Compile Include="ControlFlowInstruction.cs" />
+    <Compile Include="Instructions\LeaInstruction.cs" />
+    <Compile Include="Instructions\MovhaInstruction.cs" />
     <Compile Include="InvalidOffsetException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelativeControlFlowInstructionBase.cs" />
-    <Compile Include="RelativeControlFlowInstruction16Base.cs" />
-    <Compile Include="RelativeControlFlowInstruction32Base.cs" />
+    <Compile Include="Instructions\RelativeControlFlowInstructionBase.cs" />
+    <Compile Include="Instructions\RelativeControlFlowInstruction16Base.cs" />
+    <Compile Include="Instructions\RelativeControlFlowInstruction32Base.cs" />
     <Compile Include="RelativeControlFlowInstructionFactory.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace TricoreInstrHelperLib
 {
-    public enum ControlFlowInstructionType
+    public enum ControlFlowInstruction
     {
         Jump16,
         Call16,

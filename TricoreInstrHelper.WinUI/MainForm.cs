@@ -1,9 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using TricoreInstrHelperLib;
-using System.Linq;
 
 namespace TricoreInstrHelper.WinUI
 {
@@ -14,126 +10,58 @@ namespace TricoreInstrHelper.WinUI
             InitializeComponent();
         }
 
+        #region Fields
+
+        private RelativeControlFlowHelperForm _relativeControlFlowHelper;
+        private AssignAddressHelperForm _assignAddressHelper;
+
+        #endregion
+
         #region Properties
-        
-        public UInt32 AddressStart
+
+        private RelativeControlFlowHelperForm RelativeControlFlowHelperForm
         {
             get
             {
-                if (!IsValidAddress(textBoxAddressStart.Text))
-                    throw new InvalidInputException("Address Start is invalid");
-                return Convert.ToUInt32(textBoxAddressStart.Text, 16);
+                if (ShouldInitialize(_relativeControlFlowHelper))
+                    _relativeControlFlowHelper = new RelativeControlFlowHelperForm();
+                return _relativeControlFlowHelper;
             }
         }
 
-        public UInt32 AddressEnd
+        private AssignAddressHelperForm AssignAddressHelperForm
         {
             get
             {
-                if (!IsValidAddress(textBoxAddressEnd.Text))
-                    throw new InvalidInputException("Address End is invalid");
-                return Convert.ToUInt32(textBoxAddressEnd.Text, 16);
-            }
-        }
-
-        public ControlFlowInstructionType InstructionType
-        {
-            get
-            {
-                string selectedInstructionType = (string)comboInstructionType.SelectedItem;
-                if (!IsValidInstructionType(selectedInstructionType))
-                    throw new InvalidInputException("Instruction Type is invalid");
-                return (ControlFlowInstructionType)Enum.Parse(typeof(ControlFlowInstructionType), selectedInstructionType);
-            }
-        }
-
-        public string Result
-        {
-            get
-            {
-                return labelResult.Text;
-            }
-            set
-            {
-                labelResult.Text = value;
+                if (ShouldInitialize(_assignAddressHelper))
+                    _assignAddressHelper = new AssignAddressHelperForm();
+                return _assignAddressHelper;
             }
         }
 
         #endregion
 
         #region Handlers
-
-        private void MainForm_Load(object sender, EventArgs e)
+        
+        private void ButtonShowRelativeControlFlowForm_Click(object sender, EventArgs e)
         {
-            string[] instructionTypes = Enum.GetNames(typeof(ControlFlowInstructionType));
-            this.comboInstructionType.Items.AddRange(instructionTypes);
-            this.comboInstructionType.SelectedItem = ControlFlowInstructionType.Call32.ToString();
+            RelativeControlFlowHelperForm.Show();
+            RelativeControlFlowHelperForm.BringToFront();
         }
 
-        private void ButtonGenerate_Click(object sender, EventArgs e)
+        private void ButtonShowAssignAddressForm_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string instr = InstructionHelper.GetInstructionString(InstructionType, AddressStart, AddressEnd);
-                Result = instr;
-            }
-            catch (InvalidInputException ex)
-            {
-                MessageBox.Show(ex.Message, "Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Result = string.Empty;
-            }
-            catch (InvalidOffsetException ex)
-            {
-                MessageBox.Show(ex.Message, "Calculated address offset error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Result = string.Empty;
-            }
-        }
-
-        private void ContextMenuStripResult_Opening(object sender, CancelEventArgs e)
-        {
-            if (string.IsNullOrEmpty(Result))
-                e.Cancel = true;
-        }
-
-        private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Result);
-        }
-
-        private void ComboInstructionType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ClearResult();
-        }
-
-        private void TextBoxAddressStart_TextChanged(object sender, EventArgs e)
-        {
-            ClearResult();
-        }
-
-        private void TextBoxAddressEnd_TextChanged(object sender, EventArgs e)
-        {
-            ClearResult();
+            AssignAddressHelperForm.Show();
+            AssignAddressHelperForm.BringToFront();
         }
 
         #endregion
 
         #region Helpers
-
-        private bool IsValidAddress(string addressString)
+        
+        private bool ShouldInitialize(Form frm)
         {
-            return Regex.IsMatch(addressString, "^[0-9A-F]{1,8}$", RegexOptions.IgnoreCase);
-        }
-
-        private bool IsValidInstructionType(string instructionType)
-        {
-            if (string.IsNullOrEmpty(instructionType))
-                return false;
-            return Enum.GetNames(typeof(ControlFlowInstructionType)).Contains(instructionType);
-        }
-
-        private void ClearResult()
-        {
-            this.Result = string.Empty;
+            return frm == null || frm.IsDisposed;
         }
 
         #endregion

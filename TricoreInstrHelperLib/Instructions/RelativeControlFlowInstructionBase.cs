@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MiscUtil.Conversion;
-
-namespace TricoreInstrHelperLib
+﻿namespace TricoreInstrHelperLib.Instructions
 {
-    public abstract class RelativeControlFlowInstructionBase : IInstruction
+    abstract class RelativeControlFlowInstructionBase : IInstruction
     {
         private readonly int MIN_OFFSET;
         private readonly int MAX_OFFSET;

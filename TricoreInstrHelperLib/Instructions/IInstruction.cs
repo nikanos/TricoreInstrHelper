@@ -1,4 +1,4 @@
-﻿namespace TricoreInstrHelperLib
+﻿namespace TricoreInstrHelperLib.Instructions
 {
     public interface IInstruction
     {
