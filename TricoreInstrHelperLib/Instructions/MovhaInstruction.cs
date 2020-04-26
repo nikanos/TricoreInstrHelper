@@ -14,13 +14,7 @@ namespace TricoreInstrHelperLib.Instructions
             _addressRegister = addressRegister;
         }
 
-        public byte OpCode
-        {
-            get
-            {
-                return 0x91;
-            }
-        }
+        public byte OpCode { get { return Constants.Opcodes.MOVHA; } }
 
         public byte[] GetInstructionBytes()
         {

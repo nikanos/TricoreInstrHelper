@@ -8,13 +8,6 @@
 
         }
 
-        public override byte OpCode
-        {
-            get
-            {
-                return 0x5C;
-            }
-        }
-
+        public override byte OpCode { get { return Constants.Opcodes.CALL16; } }
     }
 }

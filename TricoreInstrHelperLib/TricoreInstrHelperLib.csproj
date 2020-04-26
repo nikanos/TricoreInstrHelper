@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AddressRegister.cs" />
     <Compile Include="AddressExtensions.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Instructions\CallInstruction16.cs" />
     <Compile Include="Instructions\IInstruction.cs" />
     <Compile Include="InstructionHelper.cs" />

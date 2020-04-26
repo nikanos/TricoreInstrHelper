@@ -8,13 +8,7 @@
 
         }
 
-        public override byte OpCode
-        {
-            get
-            {
-                return 0x1D;
-            }
-        }
+        public override byte OpCode { get { return Constants.Opcodes.JUMP32; } }
 
     }
 }

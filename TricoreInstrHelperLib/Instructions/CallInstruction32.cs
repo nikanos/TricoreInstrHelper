@@ -8,13 +8,7 @@
 
         }
 
-        public override byte OpCode
-        {
-            get
-            {
-                return 0x6D;
-            }
-        }
+        public override byte OpCode { get { return Constants.Opcodes.CALL32; } }
 
     }
 }
